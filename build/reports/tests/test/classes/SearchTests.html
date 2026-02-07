@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class SearchTests</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class SearchTests</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/default-package.html">default-package</a> &gt; SearchTests</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">1</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">8.571s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox failures" id="successRate">
+<div class="percent">0%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="tab-container">
+<ul class="tabLinks">
+<li>
+<a href="#">Failed tests</a>
+</li>
+<li>
+<a href="#">Tests</a>
+</li>
+<li>
+<a href="#">Standard error</a>
+</li>
+</ul>
+<div class="tab">
+<h2>Failed tests</h2>
+<div class="test">
+<a name="successfulSearchTest()"></a>
+<h3 class="failures">successfulSearchTest()</h3>
+<span class="code">
+<pre>Invalid element state [[name=q]]: element not interactable
+Screenshot: file:/Users/elenakamaleeva/IdeaProjects/qa_hw/build/reports/tests/1770485538518.0.png
+Page source: file:/Users/elenakamaleeva/IdeaProjects/qa_hw/build/reports/tests/1770485538518.0.html
+Timeout: 4s
+Caused by: ElementNotInteractableException: element not interactable
+	at app//com.codeborne.selenide.impl.ExceptionWrapper.wrap(ExceptionWrapper.java:19)
+	at app//com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:171)
+	at app//com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:90)
+	at app/jdk.proxy3/jdk.proxy3.$Proxy13.setValue(Unknown Source)
+	at app//SearchTests.successfulSearchTest(SearchTests.java:10)
+	at java.base@24/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base@24/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base@24/java.util.ArrayList.forEach(ArrayList.java:1604)
+Caused by: org.openqa.selenium.ElementNotInteractableException: element not interactable
+  (Session info: chrome=144.0.7559.133)
+Build info: version: '4.40.0', revision: 'b3333f1'
+System info: os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '26.2', java.version: '24'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [a4ea2601c4c23829956dcca0cfb89e90, sendKeysToElement {id=f.45ED07DCB7FA48CF7946AD06B1C4D78D.d.361BF0D438D782273CE3C3BA0F6C70EB.e.10, value=[Ljava.lang.CharSequence;@3fae596}]
+Capabilities {acceptInsecureCerts: true, browserName: chrome, browserVersion: 144.0.7559.133, chrome: {chromedriverVersion: 144.0.7559.133 (7da823b1d59..., userDataDir: /var/folders/nx/wfj2d1nj7q5...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:58507}, goog:processID: 52353, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: mac, proxy: Proxy(), se:cdp: ws://localhost:58507/devtoo..., se:cdpVersion: 144.0.7559.133, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: accept, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on mac (a4ea2601c4c23829956dcca0cfb89e90)] -&gt; css selector: [name=q]]
+Session ID: a4ea2601c4c23829956dcca0cfb89e90
+	at app//org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:169)
+	at app//org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:142)
+	at app//org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+	at app//org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:223)
+	at app//org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at app//org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at app//org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:601)
+	at app//org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:223)
+	at app//org.openqa.selenium.remote.RemoteWebElement.sendKeys(RemoteWebElement.java:110)
+	at app//com.codeborne.selenide.commands.SetValue.setValueForTextInput(SetValue.java:65)
+	at app//com.codeborne.selenide.commands.SetValue.execute(SetValue.java:38)
+	at app//com.codeborne.selenide.FluentCommand.execute(FluentCommand.java:27)
+	at app//com.codeborne.selenide.FluentCommand.execute(FluentCommand.java:19)
+	at app//com.codeborne.selenide.commands.Commands.execute(Commands.java:161)
+	at app//com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:138)
+	... 6 more
+</pre>
+</span>
+</div>
+</div>
+<div class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="failures">successfulSearchTest()</td>
+<td class="failures">8.571s</td>
+<td class="failures">failed</td>
+</tr>
+</table>
+</div>
+<div class="tab">
+<h2>Standard error</h2>
+<span class="code">
+<pre>SLF4J(W): No SLF4J providers were found.
+SLF4J(W): Defaulting to no-operation (NOP) logger implementation
+SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="https://www.gradle.org">Gradle 9.0.0</a> at 7 февр. 2026 г., 19:32:19</p>
+</div>
+</div>
+</body>
+</html>
