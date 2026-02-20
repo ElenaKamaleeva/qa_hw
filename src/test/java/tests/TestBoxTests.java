@@ -8,14 +8,10 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class TestBoxTests {
+public class TestBoxTests extends TestBase {
 
-    @BeforeAll
-    static void beforeAll() {
-        Configuration.browser = "chrome";
-        Configuration.browserSize = "1920x1080";
-        Configuration.baseUrl = "https://demoqa.com/";
-    }
+
+
 
     @Test
     void successfulFillFormTest() {
