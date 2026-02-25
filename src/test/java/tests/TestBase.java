@@ -11,7 +11,7 @@ public class TestBase {
     static void beforeAll() {
         Configuration.browser = "chrome";
         Configuration.browserSize = "1920x1080";
-        Configuration.baseUrl = "https://demoqa.com/";
+        Configuration.baseUrl = "https://demoqa.com";
     }
 
     @AfterEach
