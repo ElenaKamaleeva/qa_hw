@@ -16,19 +16,18 @@ public class PracticeFormTest {
     @BeforeAll
     static void setup() {
         Configuration.browserSize = "1920x1080";
-       // Configuration.pageLoadStrategy = "eager";
+        Configuration.pageLoadStrategy = "eager";
+        Configuration.baseUrl = "https://app.qa.guru";
     }
 
     @Test
     void fillFullPracticeForm() {
 
-        open("https://app.qa.guru/automation-practice-form/");
+        open("/automation-practice-form/");
 
         $("[data-testid='ClearIcon']")
                 .shouldBe(visible, Duration.ofSeconds(10))
                 .click();
-
-        sleep(1000);
 
         $("[data-testid='firstName'] input").sendKeys("Elena");
         $("[data-testid='lastName'] input").sendKeys("Kamaleeva");
@@ -40,12 +39,10 @@ public class PracticeFormTest {
 
         // Date of Birth
         $("[data-testid='dateOfBirth']").click();
-        sleep(300);
         $("[data-testid='dateOfBirth']").sendKeys("05");
         $("[data-testid='dateOfBirth']").sendKeys("05");
         $("[data-testid='dateOfBirth']").sendKeys("1990");
         $("[data-testid='dateOfBirth']").pressTab();
-        sleep(300);
 
         // Subjects
         $("[data-testid='subjects']").parent().click();
@@ -63,10 +60,7 @@ public class PracticeFormTest {
 
         // State
         $x("//input[@data-testid='stateCity']/preceding-sibling::div[@role='combobox']").click();
-        sleep(1000);
         $$("li").findBy(text("California")).click();
-
-        sleep(500);
 
         // City
         $("#city-select").selectOption("San Diego");
@@ -80,11 +74,9 @@ public class PracticeFormTest {
         // Submit
         $("[type='submit']").scrollIntoView(true).click();
 
-        // Проверяем заголовок
         $("[type='submit']").scrollIntoView(true).click();
         executeJavaScript("window.scrollTo(0, 0)");
 
-// Ищем h4 с нужным текстом, а не просто первый h4
         $x("//h4[text()='Thank you for submitting the form']")
                 .shouldBe(visible, Duration.ofSeconds(10));
 
