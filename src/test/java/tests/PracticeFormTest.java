@@ -8,33 +8,11 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Selenide.$;
+import static tests.testdata.testData.*;
 
 public class PracticeFormTest {
 
-    // Test data
-    private static final String FIRST_NAME = "Elena";
-    private static final String LAST_NAME = "Kamaleeva";
-    private static final String EMAIL = "test_qa_guru@test.com";
-    private static final String PHONE = "4153456789";
-    private static final String PHONE_FORMATTED = "+1 415 345 6789";
-    private static final String GENDER = "Female";
-    private static final String DATE_OF_BIRTH_DAY = "05";
-    private static final String DATE_OF_BIRTH_MONTH = "05";
-    private static final String DATE_OF_BIRTH_YEAR = "1990";
-    private static final String DATE_OF_BIRTH_FORMATTED = "05/05/1990";
-    private static final String SUBJECT = "Maths";
-    private static final String LANGUAGE = "Russian";
-    private static final String HOBBY_1 = "Sports";
-    private static final String HOBBY_2 = "Reading";
-    private static final String HOBBY_3 = "Music";
-    private static final String HOBBIES_FORMATTED = "Sports, Reading, Music";
-    private static final String STATE = "California";
-    private static final String CITY = "San Diego";
-    private static final String STATE_CITY_FORMATTED = "California, San Diego";
-    private static final String ADDRESS = "Limassol, Cyprus";
-    private static final String FILE_NAME = "test.png";
 
     @BeforeAll
     static void setup() {
