@@ -1,6 +1,9 @@
 package pages;
 
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import pages.components.DatePickerComponent;
+import pages.components.ResultTableComponent;
 
 import java.time.Duration;
 
@@ -10,50 +13,54 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class PracticeFormPage {
 
-    // ── Locators ────────────────────────────────────────────────────────────
+    // ── Components ───────────────────────────────────────────────────────────
 
-    private final SelenideElement clearIcon         = $("[data-testid='ClearIcon']");
-    private final SelenideElement firstNameInput    = $("[data-testid='firstName'] input");
-    private final SelenideElement lastNameInput     = $("[data-testid='lastName'] input");
-    private final SelenideElement emailInput        = $("[data-testid='email'] input");
-    private final SelenideElement phoneInput        = $("[data-testid='phone']");
-    private final SelenideElement dateOfBirthInput  = $("[data-testid='dateOfBirth']");
-    private final SelenideElement subjectsDropdown  = $("[data-testid='subjects']");
-    private final SelenideElement languageDropdown  = $("[data-testid='language']");
-    private final SelenideElement addressInput      = $("[data-testid='address']");
-    private final SelenideElement fileInput         = $("input[type='file']");
-    private final SelenideElement submitButton      = $("[type='submit']");
-    private final SelenideElement citySelect        = $("#city-select");
-    private final SelenideElement stateCombobox     =
+    private final DatePickerComponent datePicker = new DatePickerComponent();
+    private final ResultTableComponent resultTable = new ResultTableComponent();
+
+    // ── Locators ─────────────────────────────────────────────────────────────
+
+    private final SelenideElement clearIcon        = $("[data-testid='ClearIcon']");
+    private final SelenideElement firstNameInput   = $("[data-testid='firstName'] input");
+    private final SelenideElement lastNameInput    = $("[data-testid='lastName'] input");
+    private final SelenideElement emailInput       = $("[data-testid='email'] input");
+    private final SelenideElement phoneInput       = $("[data-testid='phone']");
+    private final SelenideElement subjectsDropdown = $("[data-testid='subjects']");
+    private final SelenideElement languageDropdown = $("[data-testid='language']");
+    private final SelenideElement addressInput     = $("[data-testid='address']");
+    private final SelenideElement fileInput        = $("input[type='file']");
+    private final SelenideElement submitButton     = $("[type='submit']");
+    private final SelenideElement citySelect       = $("#city-select");
+    private final SelenideElement stateCombobox    =
             $x("//input[@data-testid='stateCity']/preceding-sibling::div[@role='combobox']");
-    private final SelenideElement successHeading    =
+    private final SelenideElement successHeading   =
             $x("//h4[text()='Thank you for submitting the form']");
 
-    // ── Actions ─────────────────────────────────────────────────────────────
+    // ── Actions ──────────────────────────────────────────────────────────────
 
     public PracticeFormPage open() {
-        com.codeborne.selenide.Selenide.open("/automation-practice-form/");
+        Selenide.open("/automation-practice-form/");
         clearIcon.shouldBe(visible, Duration.ofSeconds(10)).click();
         return this;
     }
 
     public PracticeFormPage fillFirstName(String firstName) {
-        firstNameInput.sendKeys(firstName);
+        firstNameInput.setValue(firstName);
         return this;
     }
 
     public PracticeFormPage fillLastName(String lastName) {
-        lastNameInput.sendKeys(lastName);
+        lastNameInput.setValue(lastName);
         return this;
     }
 
     public PracticeFormPage fillEmail(String email) {
-        emailInput.sendKeys(email);
+        emailInput.setValue(email);
         return this;
     }
 
     public PracticeFormPage fillPhone(String phone) {
-        phoneInput.sendKeys(phone);
+        phoneInput.setValue(phone);
         return this;
     }
 
@@ -63,11 +70,7 @@ public class PracticeFormPage {
     }
 
     public PracticeFormPage fillDateOfBirth(String day, String month, String year) {
-        dateOfBirthInput.click();
-        dateOfBirthInput.sendKeys(day);
-        dateOfBirthInput.sendKeys(month);
-        dateOfBirthInput.sendKeys(year);
-        dateOfBirthInput.pressTab();
+        datePicker.setDate(day, month, year);
         return this;
     }
 
@@ -103,7 +106,7 @@ public class PracticeFormPage {
     }
 
     public PracticeFormPage fillAddress(String address) {
-        addressInput.sendKeys(address);
+        addressInput.setValue(address);
         return this;
     }
 
@@ -114,8 +117,6 @@ public class PracticeFormPage {
 
     public PracticeFormPage submit() {
         submitButton.scrollIntoView(true).click();
-        submitButton.scrollIntoView(true).click();
-        executeJavaScript("window.scrollTo(0, 0)");
         return this;
     }
 
@@ -127,7 +128,7 @@ public class PracticeFormPage {
     }
 
     public PracticeFormPage verifyResult(String field, String expected) {
-        $x("//p[text()='" + field + "']/following::p[1]").shouldHave(text(expected));
+        resultTable.verifyField(field, expected);
         return this;
     }
 }
