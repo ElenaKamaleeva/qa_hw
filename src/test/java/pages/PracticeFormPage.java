@@ -1,5 +1,6 @@
 package pages;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import pages.components.DatePickerComponent;
@@ -15,10 +16,10 @@ public class PracticeFormPage {
 
     // ── Components ───────────────────────────────────────────────────────────
 
-    private final DatePickerComponent datePicker = new DatePickerComponent();
+    private final DatePickerComponent datePicker   = new DatePickerComponent();
     private final ResultTableComponent resultTable = new ResultTableComponent();
 
-    // ── Locators ─────────────────────────────────────────────────────────────
+    // ── Static locators ──────────────────────────────────────────────────────
 
     private final SelenideElement clearIcon        = $("[data-testid='ClearIcon']");
     private final SelenideElement firstNameInput   = $("[data-testid='firstName'] input");
@@ -31,10 +32,18 @@ public class PracticeFormPage {
     private final SelenideElement fileInput        = $("input[type='file']");
     private final SelenideElement submitButton     = $("[type='submit']");
     private final SelenideElement citySelect       = $("#city-select");
+    private final SelenideElement bodyElement      = $("body");
+    private final ElementsCollection listItems     = $$("li");
     private final SelenideElement stateCombobox    =
             $x("//input[@data-testid='stateCity']/preceding-sibling::div[@role='combobox']");
     private final SelenideElement successHeading   =
             $x("//h4[text()='Thank you for submitting the form']");
+
+    // ── Dynamic locator templates ─────────────────────────────────────────────
+
+    private final String genderOptionSelector  = "[data-testid='gender'][value='%s']";
+    private final String dropdownOptionSelector = "[data-value='%s']";
+    private final String hobbyOptionSelector   = "[data-testid='hobbies'][value='%s']";
 
     // ── Actions ──────────────────────────────────────────────────────────────
 
@@ -65,7 +74,7 @@ public class PracticeFormPage {
     }
 
     public PracticeFormPage selectGender(String gender) {
-        $("[data-testid='gender'][value='" + gender + "']").click();
+        $(String.format(genderOptionSelector, gender)).click();
         return this;
     }
 
@@ -76,27 +85,27 @@ public class PracticeFormPage {
 
     public PracticeFormPage selectSubject(String subject) {
         subjectsDropdown.parent().click();
-        $("[data-value='" + subject + "']").click();
-        $("body").click();
+        $(String.format(dropdownOptionSelector, subject)).click();
+        bodyElement.click();
         return this;
     }
 
     public PracticeFormPage selectLanguage(String language) {
         languageDropdown.parent().click();
-        $("[data-value='" + language + "']").click();
+        $(String.format(dropdownOptionSelector, language)).click();
         return this;
     }
 
     public PracticeFormPage selectHobbies(String... hobbies) {
         for (String hobby : hobbies) {
-            $("[data-testid='hobbies'][value='" + hobby + "']").click();
+            $(String.format(hobbyOptionSelector, hobby)).click();
         }
         return this;
     }
 
     public PracticeFormPage selectState(String state) {
         stateCombobox.click();
-        $$("li").findBy(text(state)).click();
+        listItems.findBy(text(state)).click();
         return this;
     }
 
