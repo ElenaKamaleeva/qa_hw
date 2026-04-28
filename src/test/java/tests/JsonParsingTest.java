@@ -1,8 +1,8 @@
 package tests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import model.Department;
-import model.Employee;
+import tests.model.Department;
+import tests.model.Employee;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

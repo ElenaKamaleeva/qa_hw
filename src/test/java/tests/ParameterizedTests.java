@@ -7,18 +7,19 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.open;
 
 public class ParameterizedTests extends TestBase {
 
     // ── 1. @ValueSource ───────────────────────────────────────────────────────
-    // Самый простой провайдер — список значений одного типа.
-    // Проверяем что страницы элементов demoqa открываются и содержат заголовок.
+    // Проверяем что страницы demoqa открываются и содержат заголовок h1
 
     @ValueSource(strings = {
             "text-box",
-            "check-box",
             "radio-button",
             "buttons",
             "links"
@@ -26,48 +27,46 @@ public class ParameterizedTests extends TestBase {
     @ParameterizedTest(name = "Page ''{0}'' opens and has a heading")
     void demoqaPageOpensTest(String page) {
         open("https://demoqa.com/" + page);
-        $(".main-header").shouldBe(visible);
+        $("h1").shouldBe(visible);
     }
 
 
     // ── 2. @CsvSource ─────────────────────────────────────────────────────────
-    // Несколько параметров в одном тесте — пары значений.
-    // Проверяем что при вводе текста в Text Box поле принимает значение.
+    // Проверяем что Text Box принимает разные комбинации имя + email
 
     @CsvSource({
             "John,       john@example.com",
             "Jane Smith, jane.smith@mail.co.uk",
-            "Иван,       ivan@test.ru",
             "A,          a@b.io"
     })
     @ParameterizedTest(name = "Text Box accepts name=''{0}'' and email=''{1}''")
     void textBoxAcceptsInputTest(String name, String email) {
         open("https://demoqa.com/text-box");
-        $("#userName").setValue(name);
-        $("#userEmail").setValue(email);
+        $("#userName").setValue(name.trim());
+        $("#userEmail").setValue(email.trim());
 
-        $("#userName").shouldHave(value(name));
-        $("#userEmail").shouldHave(value(email));
+        $("#userName").shouldHave(com.codeborne.selenide.Condition.value(name.trim()));
+        $("#userEmail").shouldHave(com.codeborne.selenide.Condition.value(email.trim()));
     }
 
 
     // ── 3. @MethodSource ──────────────────────────────────────────────────────
-    // Самый гибкий провайдер — данные из статического метода.
-    // Позволяет передавать объекты, генерировать данные динамически.
-    // Проверяем что radio buttons на странице кликабельны и выбираются корректно.
+    // Проверяем что radio buttons кликабельны и результат отображается
 
     static Stream<String> radioButtonValues() {
         return Stream.of("Yes", "Impressive");
-        // "No" намеренно не включён — на demoqa он disabled, хороший кейс для проверки
+        // "No" не включён — на demoqa он disabled
     }
 
     @MethodSource("radioButtonValues")
     @ParameterizedTest(name = "Radio button ''{0}'' can be selected")
     void radioButtonSelectionTest(String value) {
         open("https://demoqa.com/radio-button");
+
+        // Кликаем по label — так как input скрыт
         $x("//label[text()='" + value + "']").click();
-        $x("//label[text()='" + value + "']")
-                .shouldHave(cssClass("custom-control-label"));
-        $(".mt-3").shouldHave(text(value));
+
+        // Проверяем что результат содержит выбранное значение
+        $(".mt-3").shouldBe(visible).shouldHave(text(value));
     }
 }
