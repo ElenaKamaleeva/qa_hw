@@ -2,7 +2,7 @@ name: Run Tests
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main, master, feature/my-task ]
   pull_request:
     branches: [ main, master ]
   workflow_dispatch:
@@ -21,11 +21,16 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
       - name: Run tests
         run: ./gradlew test --no-daemon
+        env:
+          DISPLAY: :99
 
       - name: Upload Allure Results
         if: always()
