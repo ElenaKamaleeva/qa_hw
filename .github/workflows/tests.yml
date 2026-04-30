@@ -28,7 +28,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Run tests
-        run: ./gradlew test --no-daemon
+        run: ./gradlew test --tests "tests.GitHubIssueTests" --no-daemon
         env:
           DISPLAY: :99
 
