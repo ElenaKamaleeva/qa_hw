@@ -24,3 +24,8 @@
 hs_err_pid*
 replay_pid*
 
+/gradle/wrapper/gradle-wrapper.properties
+build/
+allure-results/
+.DS_Store
+src/.DS_Store
