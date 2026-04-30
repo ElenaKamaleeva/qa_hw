@@ -29,3 +29,4 @@ build/
 allure-results/
 .DS_Store
 src/.DS_Store
+!gradle/wrapper/gradle-wrapper.jar
